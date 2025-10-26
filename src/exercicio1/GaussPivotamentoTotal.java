@@ -62,10 +62,11 @@ public class GaussPivotamentoTotal {
 
             for (int i = k + 1; i < n; i++) {
                 m = Ab[nlin[i]][ncol[k]] / Ab[nlin[k]][ncol[k]];
-                Ab[nlin[i]][ncol[k]] = 0;
-                for (int j = k + 1; j <= n; j++) {
-                    Ab[nlin[i]][n] -= m * Ab[nlin[k]][n];
+                for (int j = k + 1; j < n; j++) {
+                    Ab[nlin[i]][ncol[j]] -= m * Ab[nlin[k]][ncol[j]];
                 }
+                Ab[nlin[i]][n] -= m * Ab[nlin[k]][n];
+                Ab[nlin[i]][ncol[k]] = 0;
             }
 
             System.out.printf("%nApós eliminação na coluna %d:%n", k + 1);
