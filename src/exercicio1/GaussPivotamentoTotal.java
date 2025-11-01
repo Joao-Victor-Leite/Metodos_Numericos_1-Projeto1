@@ -1,17 +1,17 @@
 package exercicio1;
 
 public class GaussPivotamentoTotal {
-    /*
+    /**
      * Resolve o sistema linear A·x = b pelo metodo da Eliminação de Gauss
      * com pivotamento total.
      *
      * @param n     tamanho da matriz (número de equações/variáveis)
      * @param A     matriz dos coeficientes do sistema (A)
      * @param b     vetor dos termos independentes (b)
-     * @return      vetor solução x, ou lança RuntimeException se não houver solução única
+     * @return      vetor solução x, ou lança RuntimeException senão houver solução única
      * @throws RuntimeException se existir pivô nulo (indicando sistema singular ou sem solução única)
      */
-    public static double[] executarGPT (int n, double[][] matriz, double[] b){
+    public static double[] executarGPT (int n, double[][] A, double[] b){
         double[] x = new double[n];
         double max;
         double valor;
@@ -19,12 +19,13 @@ public class GaussPivotamentoTotal {
 
         int[] nlin = new int[n];
         int[] ncol = new int[n];
+
         for (int i = 0; i < n; i++) {
             nlin[i] = i;
             ncol[i] = i;
         }
 
-        double[][] Ab = MatrizBase.getMatrizAumentada(n, matriz, b);
+        double[][] Ab = MatrizBase.getMatrizAumentada(n, A, b);
         System.out.println("Matriz aumentada inicial (Ab):");
         MatrizBase.imprimirMatrizAumentada(Ab);
 
@@ -93,10 +94,14 @@ public class GaussPivotamentoTotal {
 
     }
 
-    /*
-    * Imprime a matriz aumentada Ab considerando os índices atuais de linhas e colunas
-    * após possíveis trocas de pivotamento total.
-    */
+    /**
+     * Imprime a matriz aumentada Ab considerando os índices atuais de linhas e colunas
+     * após possíveis trocas de pivotamento total.
+     *
+     * @param Ab   matriz aumentada do sistema linear
+     * @param nlin vetor de índices das linhas, indicando a ordem atual das linhas após trocas de pivotamento.
+     * @param ncol vetor de índices das colunas, indicando a ordem atual das colunas após trocas de pivotamento.
+     */
     private static void imprimirMatriz(double[][] Ab, int[] nlin, int[] ncol) {
         for (int i = 0; i < Ab.length; i++) {
             for (int j = 0; j < Ab[0].length; j++) {

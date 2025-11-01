@@ -1,7 +1,7 @@
 package exercicio1;
 
 public class GaussSiedel {
-    /*
+    /**
      * Resolve o sistema linear A·x = b pelo metodo iterativo de Gauss-Seidel.
      *
      * @param n       tamanho da matriz (número de equações/variáveis)

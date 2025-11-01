@@ -1,15 +1,15 @@
 package exercicio1;
 
 public class SobreRelaxamento {
-    /*
+    /**
      * Resolve o sistema linear A·x = b pelo metodo iterativo de Sobre-relaxamento (SOR).
      *
-     * @param n       tamanho da matriz (número de equações/variáveis)
-     * @param A       matriz dos coeficientes do sistema (A)
-     * @param b       vetor dos termos independentes (b)
-     * @param w       fator de relaxação (0 < w < 2)
-     * @param tol     tolerância para o critério de parada (erro máximo permitido)
-     * @param maxIter número máximo de iterações permitidas
+     * @param n         tamanho da matriz (número de equações/variáveis)
+     * @param A         matriz dos coeficientes do sistema (A)
+     * @param b         vetor dos termos independentes (b)
+     * @param w         fator de relaxação (0 < w < 2)
+     * @param tol       tolerância para o critério de parada (erro máximo permitido)
+     * @param maxIter   número máximo de iterações permitidas
      * @return vetor solução aproximada x, ou o último vetor calculado caso o metodo
      *         não convirja dentro do número máximo de iterações
      */

@@ -1,14 +1,14 @@
 package exercicio1;
 
 public class GaussPivotamentoParcialEscala {
-    /*
+    /**
      * Resolve o sistema linear A·x = b pelo metodo da Eliminação de Gauss
      * com pivotamento parcial com escala.
      *
-     * @param n tamanho da matriz
-     * @param matriz matriz dos coeficientes (A)
-     * @param b vetor dos termos independentes
-     * @return vetor solução x, ou null se não houver solução única
+     * @param n     tamanho da matriz
+     * @param A     matriz dos coeficientes (A)
+     * @param b     vetor dos termos independentes
+     * @return      vetor solução x, ou null se não houver solução única
      */
     public static double[] executarGPPE (int n, double[][] A, double[] b){
         double[] x = new double[n];
@@ -82,6 +82,14 @@ public class GaussPivotamentoParcialEscala {
 
     }
 
+    /**
+     * Imprime a matriz aumentada do sistema linear A·x = b
+     *
+     * @param A     matriz dos coeficientes (A)
+     * @param b     vetor dos termos independentes
+     * @param nlin  vetor de índices das linhas, indicando a ordem atual das linhas
+     *              após trocas de pivotamento
+     */
     private static void imprimirMatriz(double[][] A, double[] b, int[] nlin) {
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[0].length; j++) {

@@ -1,19 +1,19 @@
 package exercicio1;
 
 public class GaussSubstituicaoRegressiva {
-    /*
+    /**
      * Resolve o sistema linear A·x = b pelo metodo da Eliminação de Gauss
      * com substituição regressiva.
      *
-     * @param n tamanho da matriz
-     * @param matriz matriz dos coeficientes (A)
-     * @param b vetor dos termos independentes
+     * @param n     tamanho da matriz
+     * @param A     matriz dos coeficientes (A)
+     * @param b     vetor dos termos independentes
      * @return vetor solução x, ou null se não houver solução única
      */
-    public static double[] executtarGSR(int n, double[][] matriz, double[] b) {
+    public static double[] executtarGSR(int n, double[][] A, double[] b) {
 
         double m;
-        double[][] Ab = MatrizBase.getMatrizAumentada(n, matriz, b);
+        double[][] Ab = MatrizBase.getMatrizAumentada(n, A, b);
 
         System.out.println("Matriz aumentada inicial (Ab):");
         MatrizBase.imprimirMatrizAumentada(Ab);
