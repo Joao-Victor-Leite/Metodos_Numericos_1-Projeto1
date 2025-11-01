@@ -5,8 +5,12 @@ import static exercicio1.GaussSiedel.executarGSiedel;
 import static exercicio1.GaussSubstituicaoRegressiva.executtarGSR;
 import static exercicio1.Jacobi.executarJacobi;
 import static exercicio1.SobreRelaxamento.executarSR;
+import static exercicio1.ErroRelativo.*;
+import static exercicio2.DecomposicaoLU.executarLU;
+import static exercicio2.InversaPorLU.calcularInversa;
 
 import exercicio1.*;
+import exercicio2.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -36,8 +40,7 @@ public class Main {
 
             switch (opcao) {
                 case 1 -> menuExercicio1(sc, valoresN);
-                case 2 -> {
-                }
+                case 2 -> menuExercicio2(sc);
                 case 9 -> limparTerminal();
                 default -> System.out.println("Opção inválida!\n");
             }
@@ -105,11 +108,71 @@ public class Main {
                 System.out.println("(w = " + w + ")");
             }
             for (int i = 0; i < resultado.length; i++){
-                System.out.printf("x[%d] = %.8f%n", i + 1, resultado[i]);
+                System.out.printf("x[%d] = %.15f%n", i + 1, resultado[i]);
             }
+
+            imprimirErros(resultado, n);
+
         }
     }
 
+    private static void menuExercicio2(Scanner sc) {
+        System.out.println("\n=== FATORAÇÃO LU ===");
+        System.out.println("=== ESCOLHA A MATRIZ ===");
+
+        MatrizesExercicio2 m = new MatrizesExercicio2();
+        System.out.println("Matriz 1:");
+        m.imprimirMatriz(m.matriz1);
+
+        System.out.println("Matriz 2:");
+        m.imprimirMatriz(m.matriz2);
+
+        System.out.print("Escolha a matriz (1 ou 2): ");
+        int matrizEscolhida = sc.nextInt();
+
+        double[][][] resultado = null;
+        int n = 0;
+
+        switch (matrizEscolhida) {
+            case 1 -> {
+                n = m.getMatrizTamanho(m.matriz1);
+                resultado = executarLU(n, m.matriz1);
+            }
+            case 2 -> {
+                n = m.getMatrizTamanho(m.matriz2);
+                resultado = executarLU(n, m.matriz2);
+            }
+            default -> System.out.println("Ecolha inválida!");
+        }
+
+        if (resultado != null) {
+            double[][] L = resultado[0];
+            double[][] U = resultado[1];
+
+            System.out.println("\nMatriz L obtida:");
+            DecomposicaoLU.imprimirMatriz(L);
+            System.out.println("\nMatriz U obtida:");
+            DecomposicaoLU.imprimirMatriz(U);
+
+            double[][] inversa = calcularInversa(L, U, n);
+            System.out.println("\nMatriz inversa A⁻¹ obtida:");
+            DecomposicaoLU.imprimirMatriz(inversa);
+
+            if (matrizEscolhida == 1) {
+                InversaPorLU.verificarInversa(m.matriz1, inversa, n);
+            } else {
+                InversaPorLU.verificarInversa(m.matriz2, inversa, n);
+            }
+        }
+
+    }
+
+    /**
+     * Recebe uma matriz como parametro e retorna sua copia
+     *
+     * @param original matriz original a ser copiada
+     * @return matriz  cópia de mesmas dimensões da original
+     */
     private static double[][] copiarMatriz(double[][] original) {
         int n = original.length;
         double[][] copia = new double[n][n];
